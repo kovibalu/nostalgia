@@ -152,6 +152,7 @@ void Jatek(PJATEKALLAS jatek)
 
 				switch (getkey()) {
 					case '\b': /* Lepesvisszavonas */
+					case 'x': /* Lepesvisszavonas */
 						if (jatek->lepes == 0)
 							break;
 						if (jatek->jatekosok[2 - jatek->kijon] == 0) { /* Ha a masik jatekos elo */
