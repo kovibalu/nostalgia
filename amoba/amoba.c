@@ -8,7 +8,7 @@
 #include "bifa.h"
 
 /* Memoriafoglalas a jatek szamara */
-PJATEKALLAS InitJatek(void) 
+PJATEKALLAS InitJatek(void)
 {
 	PJATEKALLAS jatek;
 	if ((jatek = (PJATEKALLAS)malloc(sizeof(JATEKALLAS))) == NULL) {
@@ -20,7 +20,7 @@ PJATEKALLAS InitJatek(void)
 }
 
 /* A tabla feltoltese ures mezokkel */
-void ClearJatek(PJATEKALLAS jatek) 
+void ClearJatek(PJATEKALLAS jatek)
 {
 	int i;
 
@@ -70,7 +70,7 @@ void TablaKiir(PJATEKALLAS jatek)
 		gotoxy(middlex - jatek->OSL/2*4 - 5, 5 + i*2);
 		cprintf("%2d |", i + 1);
 		for (j = 0; j < jatek->OSL; j++) {
-			if (jatek->lepes > 0 && i == jatek->lepesek[jatek->lepes - 1].sor && 
+			if (jatek->lepes > 0 && i == jatek->lepesek[jatek->lepes - 1].sor &&
 				j == jatek->lepesek[jatek->lepes - 1].osl) {
 				hatter = WHITE;
 			} else {
@@ -149,7 +149,7 @@ void Jatek(PJATEKALLAS jatek)
 				gotoxy(0, 0);
 
 				settextcolor(LIGHTGRAY, BLACK);
-				
+
 				switch (getkey()) {
 					case '\b': /* Lepesvisszavonas */
 						if (jatek->lepes == 0)
@@ -159,7 +159,7 @@ void Jatek(PJATEKALLAS jatek)
 							TablaKiir(jatek);
 							ClearText(jatek->SOR, 5);
 							kilep = 1;
-						} else if (jatek->jatekosok[2 - jatek->kijon] != 0 && jatek->lepes >= 2) { 
+						} else if (jatek->jatekosok[2 - jatek->kijon] != 0 && jatek->lepes >= 2) {
 							TorolLepes(jatek);          /* Ha a masik jatekos gepi */
 							TorolLepes(jatek);          /* az o lepeset is torolni kell */
 							TablaKiir(jatek);
@@ -184,6 +184,7 @@ void Jatek(PJATEKALLAS jatek)
 						}
 						break;
 					case UP:
+					case 'k':
 						if (posy > 0) {
 							posy--;
 						} else {
@@ -191,6 +192,7 @@ void Jatek(PJATEKALLAS jatek)
 						}
 						break;
 					case DOWN:
+					case 'j':
 						if (posy < jatek->SOR - 1) {
 							posy++;
 						} else {
@@ -198,6 +200,7 @@ void Jatek(PJATEKALLAS jatek)
 						}
 						break;
 					case LEFT:
+					case 'h':
 						if (posx > 0) {
 							posx--;
 						} else {
@@ -205,6 +208,7 @@ void Jatek(PJATEKALLAS jatek)
 						}
 						break;
 					case RIGHT:
+					case 'l':
 						if (posx < jatek->OSL - 1) {
 							posx++;
 						} else {
@@ -233,7 +237,7 @@ void Jatek(PJATEKALLAS jatek)
 		} else if (jatek->jatekosok[jatek->kijon - 1] >= 1) { /* Gepi jatekos */
 			ClearText(jatek->SOR, 5);
 			gotoxy(0, 3 + jatek->SOR*2 + 3);
-			cprintf("A(z) %d-es jatekos (MI - %d nehezseg) lep.\n", jatek->kijon, 
+			cprintf("A(z) %d-es jatekos (MI - %d nehezseg) lep.\n", jatek->kijon,
 				jatek->jatekosok[jatek->kijon - 1]);
 			if (jatek->kijon == 1) {
 				cprintf("\"O\" karakter\n");
@@ -290,7 +294,7 @@ ex:
 			TablaKiir(jatek);
 			ClearText(jatek->SOR, 5);
 			gotoxy(0, 3 + jatek->SOR*2 + 3);
-			cprintf("%d. jatekos (MI - %d nehezseg) %d %d mezore lepett.\n", jatek->kijon, 
+			cprintf("%d. jatekos (MI - %d nehezseg) %d %d mezore lepett.\n", jatek->kijon,
 				jatek->jatekosok[jatek->kijon - 1], hovax + 1, hovay + 1);
 			cprintf("A szamitogep %d sec alatt lepett.\n", eltelt);
 			cprintf("A jatek a %d. lepesnel tart.", jatek->lepes);
@@ -309,7 +313,7 @@ ex:
 		if (jatek->jatekosok[gyoz - 1] == 0) {
 			cprintf("%d. jatekos gyozott (elo jatekos) a(z) %d. lepesben !\n", gyoz, jatek->lepes);
 		} else {
-			cprintf("%d. jatekos gyozott (MI - %d nehezseg) a(z) %d. lepesben !\n", 
+			cprintf("%d. jatekos gyozott (MI - %d nehezseg) a(z) %d. lepesben !\n",
 				gyoz, jatek->jatekosok[gyoz - 1], jatek->lepes);
 		}
 		ClearJatek(jatek); /* Befejezett jatek */

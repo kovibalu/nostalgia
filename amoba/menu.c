@@ -29,7 +29,7 @@ int MakeMenu(char *cim, MENUPONT *menupontok, int n)
 	getsize(&middlex, &middley);
 	middlex /= 2;
 	middley /= 2;
-	
+
 	clrscr();
 	setcursortype(0);
 
@@ -85,6 +85,7 @@ int MakeMenu(char *cim, MENUPONT *menupontok, int n)
 		cprintf("+");
 		switch (getkey()) {
 			case UP:
+      case 'k':
 				do {
 					if (pos > 0) {
 						pos--;
@@ -94,6 +95,7 @@ int MakeMenu(char *cim, MENUPONT *menupontok, int n)
 				} while (menupontok[pos].enabled != 1);
 				break;
 			case DOWN:
+      case 'j':
 				do {
 					if (pos < n - 1) {
 						pos++;
