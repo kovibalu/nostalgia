@@ -1,3 +1,3 @@
 # nostalgia
 
-I collected some of my very old projects in this repository.
+I collected some very old projects in this repository.
