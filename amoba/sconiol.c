@@ -1,4 +1,4 @@
-#if defined(__linux__) || defined(__sun)
+#if defined(__linux__) || defined(__sun) || __APPLE__
 
 #include <stdio.h>
 #include <time.h>
